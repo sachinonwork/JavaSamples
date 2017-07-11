@@ -2,6 +2,7 @@ package in.co.sample;
 
 import in.co.sample.model.Address;
 import in.co.sample.model.Person;
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class PersonFilterTests {
                 found = Boolean.TRUE;
             }
         }
-        assertTrue(Boolean.TRUE == found);
+        Assert.assertTrue(Boolean.TRUE == found);
     }
 
     @Test
@@ -43,7 +44,7 @@ public class PersonFilterTests {
                 found = Boolean.TRUE;
             }
         }
-        assertFalse(found);
+        Assert.assertFalse(found);
     }
 
     private Person getSinglePerson(String personName, String firstLineAddress, String secondLineAddress, Date birthDate, String city) {
