@@ -2,6 +2,8 @@ package in.co.sample.model;
 
 import java.util.Date;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Created by sdanayak on 7/7/17.
@@ -30,12 +32,17 @@ public class Person {
         return address;
     }
 
-    public Person filter(List<Person> personList) {
-        for(Person person : personList) {
-            if(this.getName().equals(person.getName()))
-                return this;
-        }
-        return null;
+
+    public static List<Person> filter(List<Person> personList, Predicate<Person> predicate) {
+        return personList.stream().filter(predicate).collect(Collectors.<Person>toList());
+    }
+
+    public List<Person> filterByName(List<Person> personList) {
+       return filter(personList, (p -> p.getName().equals(getName())));
+    }
+
+    public List<Person> filterByCity(List<Person> personList) {
+        return filter(personList, (p -> p.getAddress().getCity().equals(getAddress().getCity())));
     }
 
     @Override

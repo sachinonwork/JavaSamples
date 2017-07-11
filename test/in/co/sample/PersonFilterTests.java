@@ -19,9 +19,14 @@ public class PersonFilterTests {
     public void should_get_person_filtered() {
         Person samplePerson = getSinglePerson("Limca1", "243, Jimbra Lane", " Adjacent to Kirloskar", new Date(1980, 1, 12), "Pune");
         List<Person> samplePersonList = getMultiplePersons(10);
-
-        Person response = samplePerson.filter(samplePersonList);
-        assertTrue(samplePerson.equals(response));
+        Boolean found = Boolean.FALSE;
+        List<Person> response = samplePerson.filterByName(samplePersonList);
+        for(Person record: response) {
+            if(samplePerson.getName().equals(record.getName())) {
+                found = Boolean.TRUE;
+            }
+        }
+        assertTrue(Boolean.TRUE == found);
     }
 
     private Person getSinglePerson(String personName, String firstLineAddress, String secondLineAddress, Date birthDate, String city) {
