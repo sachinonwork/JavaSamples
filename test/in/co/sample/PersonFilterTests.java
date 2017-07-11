@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -16,8 +17,9 @@ import static org.junit.Assert.assertTrue;
 public class PersonFilterTests {
 
     @Test
-    public void should_get_person_filtered() {
-        Person samplePerson = getSinglePerson("Limca1", "243, Jimbra Lane", " Adjacent to Kirloskar", new Date(1980, 1, 12), "Pune");
+    public void should_get_same_name_person_filtered() {
+        Person samplePerson = getSinglePerson("Limca1", "243, Jimbra Lane", " Adjacent to Kirloskar",
+                new Date(1980, 1, 12), "Pune");
         List<Person> samplePersonList = getMultiplePersons(10);
         Boolean found = Boolean.FALSE;
         List<Person> response = samplePerson.filterByName(samplePersonList);
@@ -27,6 +29,21 @@ public class PersonFilterTests {
             }
         }
         assertTrue(Boolean.TRUE == found);
+    }
+
+    @Test
+    public void should_get_person_of_specific_city_filtered() {
+        Person samplePerson = getSinglePerson("Limca1", "243, Jimbra Lane", " Adjacent to Kirloskar",
+                new Date(1980, 1, 12), "Jaipur");
+        List<Person> samplePersonList = getMultiplePersons(10);
+        Boolean found = Boolean.FALSE;
+        List<Person> response = samplePerson.filterByCity(samplePersonList);
+        for(Person record: response) {
+            if(samplePerson.getName().equals(record.getName())) {
+                found = Boolean.TRUE;
+            }
+        }
+        assertFalse(found);
     }
 
     private Person getSinglePerson(String personName, String firstLineAddress, String secondLineAddress, Date birthDate, String city) {
