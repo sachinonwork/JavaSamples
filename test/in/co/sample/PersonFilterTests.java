@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by sdanayak on 7/7/17.
@@ -20,7 +20,8 @@ public class PersonFilterTests {
         Person samplePerson = getSinglePerson("Limca1", "243, Jimbra Lane", " Adjacent to Kirloskar", new Date(1980, 1, 12), "Pune");
         List<Person> samplePersonList = getMultiplePersons(10);
 
-        assertFalse(samplePerson.equals(samplePerson.filter(samplePersonList)));
+        Person response = samplePerson.filter(samplePersonList);
+        assertTrue(samplePerson.equals(response));
     }
 
     private Person getSinglePerson(String personName, String firstLineAddress, String secondLineAddress, Date birthDate, String city) {
@@ -42,6 +43,6 @@ public class PersonFilterTests {
             samplePersons.add(getSinglePerson("Limca" + loop, "243, Jimbra Lane" + loop,
                     " Adjacent to Kirloskar", new Date(1980, loop, 12), "Pune"));
         }
-        return null;
+        return samplePersons;
     }
 }
