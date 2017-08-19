@@ -55,7 +55,6 @@ public class Person {
         if (!name.equals(person.name)) return false;
         if (!dateOfBirth.equals(person.dateOfBirth)) return false;
         return address.equals(person.address);
-
     }
 
     @Override

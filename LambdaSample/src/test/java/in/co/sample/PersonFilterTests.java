@@ -22,13 +22,8 @@ public class PersonFilterTests {
         Person samplePerson = getSinglePerson("Limca1", "243, Jimbra Lane", " Adjacent to Kirloskar",
                 new Date(1980, 1, 12), "Pune");
         List<Person> samplePersonList = getMultiplePersons(10);
-        Boolean found = Boolean.FALSE;
         List<Person> response = samplePerson.filterByName(samplePersonList);
-        for(Person record: response) {
-            if(samplePerson.getName().equals(record.getName())) {
-                found = Boolean.TRUE;
-            }
-        }
+        Boolean found = lookupPerson(samplePerson, response);
         Assert.assertTrue(Boolean.TRUE == found);
     }
 
@@ -37,14 +32,19 @@ public class PersonFilterTests {
         Person samplePerson = getSinglePerson("Limca1", "243, Jimbra Lane", " Adjacent to Kirloskar",
                 new Date(1980, 1, 12), "Jaipur");
         List<Person> samplePersonList = getMultiplePersons(10);
-        Boolean found = Boolean.FALSE;
         List<Person> response = samplePerson.filterByCity(samplePersonList);
+        Boolean found = lookupPerson(samplePerson, response);
+        Assert.assertFalse(found);
+    }
+
+    private Boolean lookupPerson(Person samplePerson, List<Person> response) {
+        Boolean found = Boolean.FALSE;
         for(Person record: response) {
             if(samplePerson.getName().equals(record.getName())) {
                 found = Boolean.TRUE;
             }
         }
-        Assert.assertFalse(found);
+        return found;
     }
 
     private Person getSinglePerson(String personName, String firstLineAddress, String secondLineAddress, Date birthDate, String city) {
